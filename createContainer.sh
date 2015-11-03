@@ -31,7 +31,7 @@ fi
 
 # Create OpenLDAP server.
 if [ ${#SLAPD_DOMAIN} -gt 0 -a ${#SLAPD_PASSWORD} -gt 0 ]; then
-    ${SCRIPT_DIR}/openldap-docker/createOpenLDAP.sh ${SLAPD_PASSWORD} ${SLAPD_DOMAIN} ${GERRIT_ADMIN_UID} ${GERRIT_ADMIN_PWD} ${GERRIT_ADMIN_EMAIL}
+    ${SCRIPT_DIR}/openldap-docker/createOpenLDAP.sh ${SLAPD_PASSWORD} ${SLAPD_DOMAIN} ${GERRIT_ADMIN_UID} ${GERRIT_ADMIN_PWD} ${GERRIT_ADMIN_EMAIL} 
 #    call_create_script ${OPENLDAP_DIR} createOpenLDAP.sh
 fi
 
@@ -40,8 +40,7 @@ ${SCRIPT_DIR}/gerrit-docker/createGerrit.sh ${GERRIT_WEBURL} ${LDAP_NAME} ${LDAP
 #call_create_script ${GERRIT_DIR} createGerrit.sh
 
 # Create Jenkins server container.
-#source ${SCRIPT_DIR}/jenkins-docker/createJenkins.sh
-call_create_script ${JENKINS_DIR} createJenkins.sh
+${SCRIPT_DIR}/jenkins-docker/createJenkins.sh ${JENKINS_NAME} ${JENKINS_VOLUME} ${GERRIT_NAME} ${JENKINS_IMAGE_NAME} ${JENKINS_OPTS} ${TIMEZONE}
 
 # Create Redmine server container.
 ${SCRIPT_DIR}/redmine-docker/createRedmine.sh ${PG_REDMINE_NAME} ${POSTGRES_IMAGE_NAME} ${REDMINE_NAME} ${REDMINE_IMAGE_NAME} ${REDMINE_VOLUME} ${GERRIT_VOLUME} ${LDAP_NAME} ${LDAP_ACCOUNTBASE}
