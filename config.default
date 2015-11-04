@@ -22,6 +22,8 @@ GERRIT_NAME=gerrit${SUFFIX}
 GERRIT_VOLUME=gerrit-volume${SUFFIX}
 PG_GERRIT_NAME=pg-gerrit${SUFFIX}
 
+#Gerrit checkout dir
+CHECKOUT_DIR=./git
 ## Gerrit access hostname
 GERRIT_WEBURL=http://${HOST_NAME}/${GERRIT_NAME}
 HTTPD_LISTENURL=proxy-http://*:8080/${GERRIT_NAME}
@@ -80,3 +82,6 @@ LDAP_VOLUME=openldap-volume
 
 ## Openldap image's name.
 LDAP_IMAGE_NAME=${LDAP_IMAGE_NAME:-openfrontier/openldap}
+
+##Timezon
+TIME_ZONE=america/los_angeles

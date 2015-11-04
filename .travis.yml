@@ -1,14 +1,23 @@
-branches:
-  only:
-    - master
-    - develop
-    - travis-spinup
+#branches:
+#  only:
+#    - master
+#    - develop
+#    - travis-spinup
 
 sudo: required
 
 services:
 - docker
 
+git:
+  submodules: false
+
+before_install:
+  # Change the first 2 lines to ensure the test environment pulls your latest changes down
+  - git config --file=.gitmodules submodule.img-scripts/jenkins-docker.url https://github.com/hipapi/jenkins-docker.git 
+  - git config --file=.gitmodules submodule.img-scripts/jenkins-docker.branch jenkins-integration
+  - git submodule sync
+  - git submodule update --recursive --init --remote
 #before_script:
 
 script:
