@@ -1,7 +1,7 @@
 env:
   global:
-  - OPENLDAP_URL=
-  - OPENLDAP_BRANCH=
+  - OPENLDAP_URL=https://github.com/zephyr834/openldap-docker.git
+  - OPENLDAP_BRANCH=phpldap
   - REDMINE_URL=
   - REDMINE_BRANCH=
   - JENKINS_URL=
@@ -14,8 +14,8 @@ env:
   - NEXUS_BRANCH=
   - DOKUWIKI_URL=
   - DOKUWIKI_BRANCH=
-  - NGINX_URL=
-  - NGINX_BRANCH=
+  - NGINX_URL=https://github.com/zephyr834/nginx-docker.git
+  - NGINX_BRANCH=phpldap
 sudo: required
 services:
 - docker

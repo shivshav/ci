@@ -25,8 +25,7 @@ source ${BASEDIR}/config.default
 
 # Create OpenLDAP server.
 if [ ${#SLAPD_DOMAIN} -gt 0 -a ${#SLAPD_PASSWORD} -gt 0 ]; then
-    ${SCRIPT_DIR}/openldap-docker/createOpenLDAP.sh ${SLAPD_PASSWORD} ${SLAPD_DOMAIN} ${GERRIT_ADMIN_UID} ${GERRIT_ADMIN_PWD} ${GERRIT_ADMIN_EMAIL} 
-
+    ${SCRIPT_DIR}/openldap-docker/createOpenLDAP.sh ${SLAPD_PASSWORD} ${SLAPD_DOMAIN} ${GERRIT_ADMIN_UID} ${GERRIT_ADMIN_PWD} ${GERRIT_ADMIN_EMAIL} ${PHPLDAPADMIN_NAME} ${PHPLDAP_IMAGE_NAME}
 fi
 
 # Create Gerrit server container.
@@ -49,5 +48,5 @@ if [ ${#NEXUS_WEBURL} -eq 0 ]; then
 fi
 
 # Create Nginx proxy server container.
-${SCRIPT_DIR}/nginx-docker/createNginx.sh ${HOST_NAME} ${GERRIT_NAME} ${JENKINS_NAME} ${REDMINE_NAME} ${NEXUS_NAME} ${DOKUWIKI_NAME} ${NGINX_IMAGE_NAME} ${NGINX_NAME} ${LDAP_NAME} ${SLAPD_DOMAIN} ${SLAPD_PASSWORD}
+${SCRIPT_DIR}/nginx-docker/createNginx.sh ${HOST_NAME} ${GERRIT_NAME} ${JENKINS_NAME} ${REDMINE_NAME} ${NEXUS_NAME} ${DOKUWIKI_NAME} ${NGINX_IMAGE_NAME} ${NGINX_NAME} ${LDAP_NAME} ${SLAPD_DOMAIN} ${SLAPD_PASSWORD} ${PHPLDAPADMIN_NAME}
 
