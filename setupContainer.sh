@@ -26,6 +26,10 @@ ${SCRIPT_DIR}/redmine-docker/setupRedmine.sh
 echo ">>>> Setup Nexus."
 ${SCRIPT_DIR}/nexus-docker/setupNexus.sh ${LDAP_NAME} ${SLAPD_DOMAIN} ${LDAP_ACCOUNTBASE} ${NEXUS_NAME}
 
+#Integrate DokuWiki with Openldap and import init data.
+echo ">>>> Setup DokuWiki."
+${SCRIPT_DIR}/dokuwiki-docker/setupDokuWiki.sh ${DOKUWIKI_NAME} ${LDAP_NAME} ${LDAP_ACCOUNTBASE} 
+
 #Restart Nginx proxy.
 echo ">>>> Restart Nginx proxy."
 docker restart ${NGINX_NAME}

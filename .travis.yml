@@ -18,34 +18,15 @@ env:
   - NGINX_BRANCH=
 sudo: required
 services:
-  - docker
+- docker
 language: bash
 git:
   submodules: false
 before_script:
-  - ./travis-submodules.sh
+- "./travis-submodules.sh"
 script:
-  - ./run.sh 
-
-
-#before_install:
-#
-  # Change the first 2 lines to ensure the test environment pulls your latest changes down
-#  - git config --file=.gitmodules submodule.img-scripts/jenkins-docker.url https://github.com/hipapi/jenkins-docker.git 
-#  - git config --file=.gitmodules submodule.img-scripts/jenkins-docker.branch master
-#  - git submodule sync
-#  - git submodule update --recursive --init --remote
-  - 
-
-
-#branches:
-#  only:
-#    - master
-#    - develop
-#    - travis-spinup
-
-# Submodules are defaulted to use shiv's repo versions
-# Define these variables for any projects that you want pulled from your forked
-# repo as opposed to the default submodule path i.e.
-# Set JENKINS_URL=https://github.com/<your-username>/jenkins-docker.git to pull your fork with your latest changes and 
-# use JENKINS_BRANCH=my-feature to use the my-feature branch from your fork for the build test
+- "./run.sh"
+- 
+notifications:
+  slack:
+    secure: OSbRgVkYht3hQ48s7wROI/d029y072Qw+LA/n7OpyNiRxsK4l7qH9yeWikBZt6dXJHluYQRUJ7tmMAR796Ua2H+OBJdUh4B81FT0InyH44WUvGU698hC0QeY8xCsgMRsQM1P+xnpArZ7flanUj+tOshu/CSg7jX6czdZ/i068yCB/GbPV2dqVjHt458oGIkYjJn0TW4R8u8z6V7yTTzXxvNPE2UKsec0RGMiA0/TrwW66oaDmps9irVVVTV1arwM3ZOQseYqcuAgF6aeVBjwGNs3nNVpkT22t6YT/ZFtFLP1/a41i0e4pwUoFnwjoqH4MX2H172627IRRBGySHCCVJnZp0zGg1QW8qDZNH2Uf8uFaz3Kd4Nf/vIBBjidZH+hPjS6n16ePEgFb73vcgLwEoO9gFfDE9tNF/6iqkVSzp9IXhdM9V0jy6L6KWZcJQl12pzWG0QRqjnyeSVoIkGnfM0ImxqD8aM75VPkKuGqBWKRJvyWBc3Zi/tZOFiEbErXfFkEi2rd502ZJXkUbPfV7WC2ixROPYKrtfShCfJezHYGooJ3bCf5AcWINahZXAzmM/dbyl7AgeLR2LUuAWDU8MYvUCdRfrUy9VMBlgH+E/O/kZPJc6Re8OgzMm3mVXUx+SgmfzZo/RbamO7DpFPFHMVjzFfeiL3O5ImNOcDaNnY=

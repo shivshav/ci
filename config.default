@@ -52,6 +52,17 @@ PG_REDMINE_NAME=pg-redmine${SUFFIX}
 ## Redmine docker image's name
 REDMINE_IMAGE_NAME=${REDMINE_IMAGE_NAME:-sameersbn/redmine}
 
+#PhpLDAP Admin container's name
+PHPLDAPADMIN_NAME=phpldapadmin${SUFFIX}
+
+#PhpLDAP Admin docker image's name
+PHPLDAP_IMAGE_NAME=${PHPLDAP_IMAGE_NAME:-osixia/phpldapadmin}
+
+## DokuWiki configs
+DOKUWIKI_NAME=dokuwiki${SUFFIX}
+DOKUWIKI_VOLUME=dokuwiki-volume${SUFFIX}
+DOKUWIKI_IMAGE_NAME=istepanov/dokuwiki${SUFFIX}
+
 ## Nginx docker container's name
 NGINX_NAME=proxy
 

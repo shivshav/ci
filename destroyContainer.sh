@@ -10,11 +10,14 @@ source ${BASEDIR}/config.default
 # Destroy Jenkins server container.
 ${SCRIPT_DIR}/jenkins-docker/destroyJenkins.sh
 
+# Destroy Gerrit server container.
+${SCRIPT_DIR}/gerrit-docker/destroyGerrit.sh
+
 # Destroy Redmine server container.
 ${SCRIPT_DIR}/redmine-docker/destroyRedmine.sh
 
-# Destroy Gerrit server container.
-${SCRIPT_DIR}/gerrit-docker/destroyGerrit.sh
+# Destroy DokuWiki server container.
+${SCRIPT_DIR}/dokuwiki-docker/destroyDokuWiki.sh
 
 # Destroy Nginx proxy server container.
 ${SCRIPT_DIR}/nginx-docker/destroyNginx.sh

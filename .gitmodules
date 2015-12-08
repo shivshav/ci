@@ -19,3 +19,6 @@
 [submodule "img-scripts/nexus-docker"]
 	path = img-scripts/nexus-docker
 	url = https://github.com/shivshav/nexus-docker.git
+[submodule "img-scripts/dokuwiki-docker"]
+	path = img-scripts/dokuwiki-docker
+	url = https://github.com/shivshav/dokuwiki-docker.git
