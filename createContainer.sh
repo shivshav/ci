@@ -50,3 +50,5 @@ ${SCRIPT_DIR}/redmine-docker/createRedmine.sh ${PG_REDMINE_NAME} ${POSTGRES_IMAG
 ${SCRIPT_DIR}/nginx-docker/createNginx.sh ${HOST_NAME} ${GERRIT_NAME} ${JENKINS_NAME} ${REDMINE_NAME} ${NEXUS_NAME} ${NGINX_IMAGE_NAME} ${NGINX_NAME} ${LDAP_NAME} ${SLAPD_DOMAIN} ${SLAPD_PASSWORD}
 #call_create_script ${NGINX_DIR} createNginx.sh
 
+# Required when redmine is restarted to support the plugin install process.
+docker restart proxy
