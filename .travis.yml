@@ -2,8 +2,8 @@ env:
   global:
   - OPENLDAP_URL=
   - OPENLDAP_BRANCH=
-  - REDMINE_URL=https://github.com/steve-dev/redmine-docker.git
-  - REDMINE_BRANCH=develop
+  - REDMINE_URL=
+  - REDMINE_BRANCH=
   - JENKINS_URL=
   - JENKINS_BRANCH=
   - JENKINS_SLAVE_URL=
