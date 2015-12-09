@@ -49,6 +49,3 @@ fi
 
 # Create Nginx proxy server container.
 ${SCRIPT_DIR}/nginx-docker/createNginx.sh ${HOST_NAME} ${GERRIT_NAME} ${JENKINS_NAME} ${REDMINE_NAME} ${NEXUS_NAME} ${DOKUWIKI_NAME} ${NGINX_IMAGE_NAME} ${NGINX_NAME} ${LDAP_NAME} ${SLAPD_DOMAIN} ${SLAPD_PASSWORD} ${PHPLDAPADMIN_NAME}
-
-# Required when redmine is restarted to support the plugin install process.
-docker restart proxy
