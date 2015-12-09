@@ -2,20 +2,20 @@ env:
   global:
   - OPENLDAP_URL=
   - OPENLDAP_BRANCH=
-  - REDMINE_URL=https://github.com/steve-dev/redmine-docker.git
-  - REDMINE_BRANCH=develop
+  - REDMINE_URL=
+  - REDMINE_BRANCH=
   - JENKINS_URL=
   - JENKINS_BRANCH=
   - JENKINS_SLAVE_URL=
   - JENKINS_SLAVE_BRANCH=
-  - GERRIT_URL=
-  - GERRIT_BRANCH=
+  - GERRIT_URL=https://github.com/cgudea/gerrit-docker.git
+  - GERRIT_BRANCH=master
   - NEXUS_URL=
   - NEXUS_BRANCH=
   - DOKUWIKI_URL=
   - DOKUWIKI_BRANCH=
-  - NGINX_URL=
-  - NGINX_BRANCH=
+  - NGINX_URL=https://github.com/cgudea/nginx-docker.git
+  - NGINX_BRANCH=master
 sudo: required
 services:
 - docker
