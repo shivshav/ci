@@ -1,13 +1,10 @@
 #!/bin/bash
+BASEDIR=$(readlink -f $(dirname $0))
+
 set -e
 
-source ~/ci/config
-source ~/ci/config.default
-
-# Start Nexus.
-if [ -n "$(docker ps -a | grep ${NEXUS_NAME})" ]; then
-    docker start ${NEXUS_NAME}
-fi
+source ${BASEDIR}/config
+source ${BASEDIR}/config.default
 
 # Start OpenLDAP
 if [ -n "$(docker ps -a | grep ${LDAP_NAME})" ]; then
@@ -32,7 +29,7 @@ done
 # Start Jenkins.
 docker start ${JENKINS_NAME}
 
-while [ -z "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 5 | grep "Jenkins is fully up and running")" ]; do
+while [ -z "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 15 | grep "Jenkins is fully up and running")" ]; do
     echo "Waiting jenkins ready."
     sleep 1
 done
@@ -52,7 +49,24 @@ while [ -z "$(docker logs ${REDMINE_NAME} 2>&1 | tail -n 5 | grep 'INFO success:
     sleep 1
 done
 
+# Start Nexus.
+if [ -n "$(docker ps -a | grep ${NEXUS_NAME})" ]; then
+    docker start ${NEXUS_NAME}
+fi
+
+# start phpldapadmin
+if [ -n "$(docker ps -a | grep ${PHPLDAPADMIN_NAME})" ]; then
+    docker start ${PHPLDAPADMIN_NAME}
+fi
+
+# start dokuwiki 
+if [ -n "$(docker ps -a | grep ${DOKUWIKI_NAME})" ]; then
+    docker start ${DOKUWIKI_NAME}
+fi
+
 # Start proxy
 docker start ${NGINX_NAME}
+
+
 
 echo ">>>> Everything is ready."

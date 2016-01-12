@@ -8,14 +8,14 @@ env:
   - JENKINS_BRANCH=
   - JENKINS_SLAVE_URL=
   - JENKINS_SLAVE_BRANCH=
-  - GERRIT_URL=https://github.com/cgudea/gerrit-docker.git
-  - GERRIT_BRANCH=master
+  - GERRIT_URL=
+  - GERRIT_BRANCH=
   - NEXUS_URL=
   - NEXUS_BRANCH=
   - DOKUWIKI_URL=
   - DOKUWIKI_BRANCH=
-  - NGINX_URL=https://github.com/cgudea/nginx-docker.git
-  - NGINX_BRANCH=master
+  - NGINX_URL=
+  - NGINX_BRANCH=
 sudo: required
 services:
 - docker
