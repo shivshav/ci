@@ -1,8 +1,12 @@
 #!/bin/bash
 SUFFIX=$1
 # Add common variables.
-source ~/ci/config
-source ~/ci/config.default
+BASEDIR=$(readlink -f $(dirname $0))
+
+set -e
+
+source ${BASEDIR}/config
+source ${BASEDIR}/config.default
 
 # Stop Jenkins server container.
 docker stop ${JENKINS_NAME}

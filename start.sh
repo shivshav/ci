@@ -1,9 +1,10 @@
 #!/bin/bash
-set -e
-#set -x
+BASEDIR=$(readlink -f $(dirname $0))
 
-source ~/ci/config
-source ~/ci/config.default
+set -e
+
+source ${BASEDIR}/config
+source ${BASEDIR}/config.default
 
 # Start OpenLDAP
 if [ -n "$(docker ps -a | grep ${LDAP_NAME})" ]; then
