@@ -27,3 +27,9 @@ docker stop ${NGINX_NAME}
 if [ -n "$(docker ps | grep ${LDAP_NAME})" ]; then
     docker stop ${LDAP_NAME}
 fi
+
+# Stop wiki
+docker stop ${DOKUWIKI_NAME}
+
+# Stop phpldapadmin
+docker stop ${PHPLDAPADMIN_NAME}
