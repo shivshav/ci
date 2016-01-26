@@ -23,6 +23,7 @@ language: bash
 git:
   submodules: false
 before_script:
+  - sudo apt-get update
   - sudo apt-get install -y python-pip
   - "./travis-submodules.sh"
 script:
