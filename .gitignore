@@ -61,3 +61,14 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Intellij
+.idea
+*.iml
+
+# Backup folder
+backups
+
+# Python
+*.pyc
+.cache
+__pycache__
