@@ -19,17 +19,15 @@ env:
 sudo: required
 services:
   - docker
-language: bash
+language: python
 git:
   submodules: false
 before_script:
-  - sudo apt-get update
-  - sudo apt-get install -y python-pip
-  - sudo pip install -r requirements.txt
+  - sudo apt-get install xvfb
+  - pip install -r requirements.txt
   - "./travis-submodules.sh"
 script:
-  - "./run.sh"
-  - "py.test ./test"
+  - "py.test"
 notifications:
   slack:
     secure: OSbRgVkYht3hQ48s7wROI/d029y072Qw+LA/n7OpyNiRxsK4l7qH9yeWikBZt6dXJHluYQRUJ7tmMAR796Ua2H+OBJdUh4B81FT0InyH44WUvGU698hC0QeY8xCsgMRsQM1P+xnpArZ7flanUj+tOshu/CSg7jX6czdZ/i068yCB/GbPV2dqVjHt458oGIkYjJn0TW4R8u8z6V7yTTzXxvNPE2UKsec0RGMiA0/TrwW66oaDmps9irVVVTV1arwM3ZOQseYqcuAgF6aeVBjwGNs3nNVpkT22t6YT/ZFtFLP1/a41i0e4pwUoFnwjoqH4MX2H172627IRRBGySHCCVJnZp0zGg1QW8qDZNH2Uf8uFaz3Kd4Nf/vIBBjidZH+hPjS6n16ePEgFb73vcgLwEoO9gFfDE9tNF/6iqkVSzp9IXhdM9V0jy6L6KWZcJQl12pzWG0QRqjnyeSVoIkGnfM0ImxqD8aM75VPkKuGqBWKRJvyWBc3Zi/tZOFiEbErXfFkEi2rd502ZJXkUbPfV7WC2ixROPYKrtfShCfJezHYGooJ3bCf5AcWINahZXAzmM/dbyl7AgeLR2LUuAWDU8MYvUCdRfrUy9VMBlgH+E/O/kZPJc6Re8OgzMm3mVXUx+SgmfzZo/RbamO7DpFPFHMVjzFfeiL3O5ImNOcDaNnY=
