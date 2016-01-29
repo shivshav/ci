@@ -23,11 +23,9 @@ language: python
 git:
   submodules: false
 before_script:
-  - "export DISPLAY=:99.0"
+  - "export DISPLAY=:0.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
-  - sudo apt-get install xvfb
-  - pip install -r requirements.txt
   - "./travis-submodules.sh"
 script:
   - "py.test -s"
