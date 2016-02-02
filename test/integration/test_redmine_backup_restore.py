@@ -14,7 +14,7 @@ def check_path_test_dir(current_dir):
 
 def log_into_ci():
     global DRIVER, DISPLAY
-    DISPLAY = Display(visible=0, size=(800,600))
+    DISPLAY = Display(visible=0)
     DISPLAY.start()
     DRIVER = webdriver.Firefox() # initilize selenium
     DRIVER.get("http://admin:passwd@localhost/redmine")
@@ -85,9 +85,14 @@ def test_redmine_backup_and_restore():
     # Log back in
     log_into_ci()
     log_into_redmine()
+    
+    # TODO: Delete debug statements
+    print DRIVER.page_source
 
     # Check if project exists
     DRIVER.get("http://localhost/redmine/projects/test-project")
+    # TODO: Delete debug statements
+    print DRIVER.page_source
     element = DRIVER.find_element_by_id("header")
     text = re.search(r'Test Project', element.text)
     assert text.re.pattern == 'Test Project'
