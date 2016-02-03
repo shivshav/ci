@@ -18,9 +18,11 @@ def log_into_ci():
     DISPLAY.start()
     DRIVER = webdriver.Firefox() # initilize selenium
     DRIVER.get("http://admin:passwd@localhost/redmine")
+    print DRIVER.page_source
 
 def log_into_redmine():
     DRIVER.get("http://localhost/redmine/login")
+    print DRIVER.page_source
     element = DRIVER.find_element_by_id("username")
     element.send_keys("admin")
     element = DRIVER.find_element_by_id("password")
@@ -86,9 +88,6 @@ def test_redmine_backup_and_restore():
     log_into_ci()
     log_into_redmine()
     
-    # TODO: Delete debug statements
-    print DRIVER.page_source
-
     # Check if project exists
     DRIVER.get("http://localhost/redmine/projects/")
     assert DRIVER.find_element_by_id("projects-index").text.find('Test Project') != -1
