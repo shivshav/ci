@@ -90,18 +90,12 @@ def test_redmine_backup_and_restore():
     print DRIVER.page_source
 
     # Check if project exists
-    DRIVER.get("http://localhost/redmine/projects/test-project")
-    # TODO: Delete debug statements
-    print DRIVER.page_source
-    element = DRIVER.find_element_by_id("header")
-    text = re.search(r'Test Project', element.text)
-    assert text.re.pattern == 'Test Project'
+    DRIVER.get("http://localhost/redmine/projects/")
+    assert DRIVER.find_element_by_id("projects-index").text.find('Test Project') != -1
 
     # Check if issue exists
-    DRIVER.get("http://localhost/redmine/projects/test-project/issues")
-    element = DRIVER.find_element_by_class_name("subject")
-    text = re.search(r'Test Issue of Type Bug', element.text)
-    assert text.re.pattern == 'Test Issue of Type Bug'
+    DRIVER.get("http://localhost/redmine/issues")
+    assert DRIVER.find_element_by_id("content").text.find('Test Issue of Type Bug') != -1
 
     # Close webpage
     DRIVER.close()
