@@ -41,11 +41,8 @@ ${SCRIPT_DIR}/redmine-docker/createRedmine.sh ${PG_REDMINE_NAME} ${POSTGRES_IMAG
 ${SCRIPT_DIR}/dokuwiki-docker/createDokuWiki.sh ${DOKUWIKI_NAME} ${DOKUWIKI_VOLUME} ${DOKUWIKI_IMAGE_NAME} ${LDAP_NAME}
 
 # Create Nexus server.
-if [ ${#NEXUS_WEBURL} -eq 0 ]; then
-#    source ${SCRIPT_DIR}/nexus-docker/createNexus.sh
-    ${SCRIPT_DIR}/nexus-docker/createNexus.sh ${NEXUS_NAME} ${NEXUS_VOLUME} ${NEXUS_IMAGE_NAME} ${LDAP_NAME}
-#    call_create_script ${NEXUS_DIR} createNexus.sh
-fi
+${SCRIPT_DIR}/nexus-docker/createNexus.sh ${NEXUS_NAME} ${NEXUS_VOLUME} ${NEXUS_IMAGE_NAME} ${LDAP_NAME}
+
 
 # Create Nginx proxy server container.
 ${SCRIPT_DIR}/nginx-docker/createNginx.sh ${HOST_NAME} ${GERRIT_NAME} ${JENKINS_NAME} ${REDMINE_NAME} ${NEXUS_NAME} ${DOKUWIKI_NAME} ${NGINX_IMAGE_NAME} ${NGINX_NAME} ${LDAP_NAME} ${SLAPD_DOMAIN} ${SLAPD_PASSWORD} ${PHPLDAPADMIN_NAME}

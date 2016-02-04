@@ -21,8 +21,3 @@ GERRIT_ADMIN_UID=admin
 GERRIT_ADMIN_PWD=passwd
 GERRIT_ADMIN_EMAIL=admin@demo.com
 
-## A Nexus server will be started by default.
-## Specify this variable only if you want to use
-## an existing nexus server instead.
-## Jenkins uses NEXUS_WEBURL to setup maven repository mirror.
-#NEXUS_WEBURL=http://127.0.0.1/nexus

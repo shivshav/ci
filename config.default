@@ -73,11 +73,8 @@ NGINX_IMAGE_NAME=${NGINX_IMAGE_NAME:-h3nrik/nginx-ldap}
 NGINX_MAX_UPLOAD_SIZE=${NGINX_MAX_UPLOAD_SIZE:-200m}
 
 ## Default Nexus URL
-if [ ${#NEXUS_WEBURL} -gt 0 ]; then
-    NEXUS_REPO=${NEXUS_WEBURL}/content/groups/public
-else
-    NEXUS_REPO=http://${HOST_NAME}/nexus/content/groups/public
-fi
+NEXUS_REPO=http://${HOST_NAME}/nexus/content/groups/public
+
 
 ## Nexus container's name.
 NEXUS_NAME=nexus
