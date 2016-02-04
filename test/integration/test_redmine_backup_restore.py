@@ -18,11 +18,9 @@ def log_into_ci():
     DISPLAY.start()
     DRIVER = webdriver.Firefox() # initilize selenium
     DRIVER.get("http://admin:passwd@localhost/redmine")
-    print DRIVER.page_source
 
 def log_into_redmine():
     DRIVER.get("http://localhost/redmine/login")
-    print DRIVER.page_source
     element = DRIVER.find_element_by_id("username")
     element.send_keys("admin")
     element = DRIVER.find_element_by_id("password")

@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 # Define common variables.
 
 ## Suffix of containers' name
