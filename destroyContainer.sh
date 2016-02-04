@@ -32,3 +32,6 @@ fi
 
 # Destroy jenkins slave volume.
 ${SCRIPT_DIR}/jenkins-slave-docker/destroyJenkinsSlave.sh
+
+echo
+echo "All applications removed."
