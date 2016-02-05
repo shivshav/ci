@@ -34,17 +34,25 @@ echo "Redmine container is ready"
 
 # Setup containers
 ${BASEDIR}/setupContainer.sh ${SUFFIX}
-while [ -n "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 5 | grep 'Running from: /usr/share/jenkins/jenkins.war')" -o \
-        -z "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 5 | grep 'setting agent port for jnlp')" ]; do
+while [ -n "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 15 | grep 'Running from: /usr/share/jenkins/jenkins.war')" -o \
+        -z "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 15 | grep 'setting agent port for jnlp')" ]; do
     echo "Waiting jenkins ready."
     sleep 1
 done
 echo "Jenkins container configured"
 
 # Ensure redmine is running
-while [ "$(curl -I http://${REDMINE_ADMIN_USER}:${REDMINE_ADMIN_PASSWD}@localhost/redmine 2>/dev/null | head -n1 | cut -d%' ' -f2)" -eq "200" ]; do
+COUNTER=0
+while [ "$(curl -I http://${REDMINE_ADMIN_USER}:${REDMINE_ADMIN_PASSWD}@localhost/redmine 2>/dev/null | head -n1 | cut -d$' ' -f2)" \
+        -ne "200" ]; do
+    # Max timeout
+    if [ $COUNTER -eq "90" ]; then 
+        exit 1; 
+    fi
     echo "Waiting redmine service"
+    echo "Status Code from redmine: $(curl -I http://${REDMINE_ADMIN_USER}:\${REDMINE_ADMIN_PASSWD}@localhost/redmine 2>/dev/null | head -n1 | cut -d$' ' -f2)"
     sleep 1
+    let COUNTER=COUNTER+1
 done
 echo "Redmine service running"
 

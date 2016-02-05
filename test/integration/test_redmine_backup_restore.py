@@ -1,4 +1,4 @@
-import subprocess, os, re
+import subprocess, os, re, shutil
 from selenium import webdriver
 from pyvirtualdisplay import Display
 
@@ -62,11 +62,13 @@ def teardown_function(function):
     DISPLAY.stop()
 
 def test_redmine_backup_and_restore():
-    # Run backup script
-    backup_path = os.path.join(PROJECT_DIR, 'img-scripts/redmine-docker/backupRedmine.sh')
-    subprocess.call([backup_path])
+    redmine_dir = os.path.join(PROJECT_DIR, 'img-scripts/redmine-docker/')
+    backup_dir = os.path.join(redmine_dir, 'backups/')
 
-    backup_dir = os.path.join(os.getcwd(), 'backups/')
+    # Run backup script
+    backup_script = os.path.join(redmine_dir, 'backupRedmine.sh')
+    subprocess.call([backup_script, backup_dir])
+
     for file in os.listdir(backup_dir):
             assert file.endswith(".sql")
 
@@ -75,8 +77,8 @@ def test_redmine_backup_and_restore():
     subprocess.call([recreate_path])
 
     # Restore environment
-    restore_path = os.path.join(PROJECT_DIR, 'img-scripts/redmine-docker/restoreRedmineBackup.sh')
-    subprocess.call([restore_path])
+    restore_script = os.path.join(redmine_dir, 'restoreRedmineBackup.sh')
+    subprocess.call([restore_script, backup_dir])
 
     # Restart environment after restore
     restart_path = os.path.join(PROJECT_DIR, 'restart.sh')
@@ -96,3 +98,10 @@ def test_redmine_backup_and_restore():
 
     # Close webpage
     DRIVER.close()
+
+    # Cleanup backup directory
+    try:
+        shutil.rmtree(backup_dir)
+    except Exception, e:
+        print e
+        exit(1)
