@@ -44,7 +44,7 @@ def create_redmine_issue():
 def setup_function(function):
     current_dir = os.getcwd() # get current directory
     check_path_test_dir(current_dir) # ensure we aren't in the test directory
-    test_dir = os.path.abspath(os.path.join(current_dir, "test/integration")) # get test directory path
+    test_dir = os.path.abspath(os.path.join(current_dir, "test", "integration")) # get test directory path
     global PROJECT_DIR
     PROJECT_DIR = current_dir 
     recreate_path = os.path.join(PROJECT_DIR, 'recreate.sh') # restart ci environment
@@ -62,8 +62,8 @@ def teardown_function(function):
     DISPLAY.stop()
 
 def test_redmine_backup_and_restore():
-    redmine_dir = os.path.join(PROJECT_DIR, 'img-scripts/redmine-docker/')
-    backup_dir = os.path.join(redmine_dir, 'backups/')
+    redmine_dir = os.path.join(PROJECT_DIR, 'img-scripts', 'redmine-docker')
+    backup_dir = os.path.join(redmine_dir, 'backups')
 
     # Run backup script
     backup_script = os.path.join(redmine_dir, 'backupRedmine.sh')
