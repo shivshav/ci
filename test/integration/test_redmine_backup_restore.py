@@ -12,11 +12,13 @@ def check_path_test_dir(current_dir):
         if x in current_dir:
             wrong_dir_error()
 
-def log_into_ci():
+def configure_headless_browser():
     global DRIVER, DISPLAY
     DISPLAY = Display(visible=0)
     DISPLAY.start()
     DRIVER = webdriver.Firefox() # initilize selenium
+
+def log_into_ci():
     DRIVER.get("http://admin:passwd@localhost/redmine")
 
 def log_into_redmine():
@@ -50,6 +52,7 @@ def setup_function(function):
     recreate_path = os.path.join(PROJECT_DIR, 'recreate.sh') # restart ci environment
     subprocess.call([recreate_path]) # call run script (how do I do verbose)?
 
+    configure_headless_browser()
     log_into_ci()
     log_into_redmine()
     create_redmine_project()
