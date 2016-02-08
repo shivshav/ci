@@ -35,13 +35,10 @@ def create_redmine_project():
     DRIVER.find_element_by_id("project_name").send_keys("Test Project")
     DRIVER.find_element_by_name("commit").click()
 
-
 def create_redmine_issue():
     DRIVER.get("http://localhost/redmine/projects/test-project/issues/new")
     DRIVER.find_element_by_id("issue_subject").send_keys("Test Issue of Type Bug")
     DRIVER.find_element_by_name("commit").click()
-    DRIVER.close()
-
 
 def setup_function(function):
     current_dir = os.getcwd() # get current directory
@@ -98,9 +95,6 @@ def test_redmine_backup_and_restore():
     # Check if issue exists
     DRIVER.get("http://localhost/redmine/issues")
     assert DRIVER.find_element_by_id("content").text.find('Test Issue of Type Bug') != -1
-
-    # Close webpage
-    DRIVER.close()
 
     # Cleanup backup directory
     try:
