@@ -67,6 +67,20 @@ fi
 # Start proxy
 docker start ${NGINX_NAME}
 
+# Ensure redmine is running
+COUNTER=0
+while [ "$(curl -I http://${REDMINE_ADMIN_USER}:${REDMINE_ADMIN_PASSWD}@localhost/redmine 2>/dev/null | head -n1 | cut -d$' ' -f2)" \
+        != "200" ]; do
+    # Max timeout
+    if [ $COUNTER -eq "90" ]; then 
+        exit 1 
+    fi
+    echo "Waiting redmine service"
+    echo "Status Code from redmine: $(curl -I http://${REDMINE_ADMIN_USER}:\${REDMINE_ADMIN_PASSWD}@localhost/redmine 2>/dev/null | head -n1 | cut -d$' ' -f2)"
+    sleep 1
+    let COUNTER=COUNTER+1
+done
+echo "Redmine service running"
 
 
 echo ">>>> Everything is ready."

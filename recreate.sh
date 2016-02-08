@@ -1,5 +1,8 @@
 #!/bin/bash
+
+BASEDIR=$(readlink -f $(dirname $0))
+
 echo ">>>>> Destroy all"
-~/ci/destroyContainer.sh
-echo ">>>>> Create all"
-~/ci/run.sh
+${BASEDIR}/destroyContainer.sh
+echo ">>>>> Run"
+${BASEDIR}/run.sh

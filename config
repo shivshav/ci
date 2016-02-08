@@ -21,6 +21,8 @@ GERRIT_ADMIN_UID=admin
 GERRIT_ADMIN_PWD=passwd
 GERRIT_ADMIN_EMAIL=admin@demo.com
 
+REDMINE_ADMIN_USER=$GERRIT_ADMIN_UID
+REDMINE_ADMIN_PASSWD=$GERRIT_ADMIN_PWD
 ## A Nexus server will be started by default.
 ## Specify this variable only if you want to use
 ## an existing nexus server instead.
