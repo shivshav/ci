@@ -28,3 +28,6 @@ REDMINE_ADMIN_PASSWD=$GERRIT_ADMIN_PWD
 ## an existing nexus server instead.
 ## Jenkins uses NEXUS_WEBURL to setup maven repository mirror.
 #NEXUS_WEBURL=http://127.0.0.1/nexus
+
+# Set to 1 to enable HTTPS instead of HTTP access
+NGINX_USE_HTTPS=1
