@@ -18,7 +18,7 @@ LDAP_ACCOUNTBASE=ou=accounts,dc=demo,dc=com
 
 ## Gerrit administrator's uid in LDAP
 GERRIT_ADMIN_UID=admin
-GERRIT_ADMIN_PWD=passwd
+GERRIT_ADMIN_PWD=password
 GERRIT_ADMIN_EMAIL=admin@demo.com
 
 REDMINE_ADMIN_USER=$GERRIT_ADMIN_UID
