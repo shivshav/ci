@@ -10,7 +10,7 @@ source ${BASEDIR}/config
 source ${BASEDIR}/config.default
 
 # Create demo project on Gerrit.
-curl -X PUT --user ${GERRIT_ADMIN_UID}:${GERRIT_ADMIN_PWD} -d@- --header "Content-Type: application/json;charset=UTF-8" ${GERRIT_WEBURL}/a/projects/demo < ${BASEDIR}/demoProject.json
+curl -k -X PUT --user ${GERRIT_ADMIN_UID}:${GERRIT_ADMIN_PWD} -d@- --header "Content-Type: application/json;charset=UTF-8" ${GERRIT_WEBURL}/a/projects/demo < ${BASEDIR}/demoProject.json
 
 # Setup local git.
 rm -rf ${BASEDIR}/demo
@@ -54,7 +54,7 @@ kill ${SSH_AGENT_PID}
 cd -
 rm -rf ${BASEDIR}/demo
 
-curl -X POST -d@- --header "Content-Type: application/xml;charset=UTF-8" ${JENKINS_WEBURL}/createItem?name=demo < ${BASEDIR}/jenkins.config.xml
+curl -k -X POST -d@- --header "Content-Type: application/xml;charset=UTF-8" ${JENKINS_WEBURL}/createItem?name=demo < ${BASEDIR}/jenkins.config.xml
 
 # Import redmine demo data
 REDMINE_DEMO_DATA_SQL=redmine-init-demo.sql

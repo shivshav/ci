@@ -4,6 +4,12 @@
 ## Suffix of containers' name
 SUFFIX=${SUFFIX:-$1}
 
+if [ ${NGINX_USE_HTTPS} -eq 0 ]; then
+    PROTO="http"
+else
+    PROTO="https"
+fi
+
 ## OpenLDAP
 if [ ${#SLAPD_DOMAIN} -gt 0 -a ${#SLAPD_PASSWORD} -gt 0 ]; then
     LDAP_SERVER="${HOST_NAME}"
@@ -23,7 +29,7 @@ PG_GERRIT_NAME=pg-gerrit${SUFFIX}
 
 
 ## Gerrit access hostname
-GERRIT_WEBURL=http://${HOST_NAME}/${GERRIT_NAME}
+GERRIT_WEBURL=${PROTO}://${HOST_NAME}/${GERRIT_NAME}
 HTTPD_LISTENURL=proxy-http://*:8080/${GERRIT_NAME}
 GERRIT_SSH_HOST=${HOST_NAME}
 
@@ -41,7 +47,7 @@ JENKINS_OPTS=--prefix=/${JENKINS_NAME}
 JENKINS_IMAGE_NAME=${JENKINS_IMAGE_NAME:-openfrontier/jenkins}
 
 ## Jenkins access
-JENKINS_WEBURL=http://${HOST_NAME}/${JENKINS_NAME}
+JENKINS_WEBURL=${PROTO}://${HOST_NAME}/${JENKINS_NAME}
 
 ## Redmine container's name
 REDMINE_NAME=redmine${SUFFIX}
@@ -75,7 +81,7 @@ NGINX_MAX_UPLOAD_SIZE=${NGINX_MAX_UPLOAD_SIZE:-200m}
 if [ ${#NEXUS_WEBURL} -gt 0 ]; then
     NEXUS_REPO=${NEXUS_WEBURL}/content/groups/public
 else
-    NEXUS_REPO=http://${HOST_NAME}/nexus/content/groups/public
+    NEXUS_REPO=${PROTO}://${HOST_NAME}/nexus/content/groups/public
 fi
 
 ## Nexus container's name.
