@@ -1,18 +1,22 @@
 #!/bin/bash
+
+BASEDIR=$(readlink -f $(dirname $0))
+SCRIPT_DIR=./img-scripts
+
 set -e
 
 # Add common variables.
-source ~/ci/config
-source ~/ci/config.default
+source ${BASEDIR}/config
+source ${BASEDIR}/config.default
 
 # Create demo project on Gerrit.
-curl -X PUT --user ${GERRIT_ADMIN_UID}:${GERRIT_ADMIN_PWD} -d@- --header "Content-Type: application/json;charset=UTF-8" ${GERRIT_WEBURL}/a/projects/demo < ~/ci/demoProject.json
+curl -k -X PUT --user ${GERRIT_ADMIN_UID}:${GERRIT_ADMIN_PWD} -d@- --header "Content-Type: application/json;charset=UTF-8" ${GERRIT_WEBURL}/a/projects/demo < ${BASEDIR}/demoProject.json
 
 # Setup local git.
-rm -rf ~/ci/demo
-mkdir ~/ci/demo
-git init ~/ci/demo
-cd ~/ci/demo
+rm -rf ${BASEDIR}/demo
+mkdir ${BASEDIR}/demo
+git init ${BASEDIR}/demo
+cd ${BASEDIR}/demo
 
 #start ssh agent and add ssh key
 eval $(ssh-agent)
@@ -29,7 +33,7 @@ git fetch -q origin refs/meta/config:refs/remotes/origin/meta/config
 # Setup project access right.
 ## Registered users can change everything since it's just a demo project.
 git checkout meta/config
-cp ~/ci/groups .
+cp ${BASEDIR}/groups .
 git config -f project.config --add access.refs/*.owner "group Registered Users"
 git config -f project.config --add access.refs/*.read "group Registered Users"
 git add groups project.config
@@ -38,7 +42,7 @@ git push origin meta/config:meta/config
 
 # Import demoProject
 git checkout master
-tar xf ~/ci/demoProject.tar
+tar xf ${BASEDIR}/demoProject.tar
 git add demo
 git commit -m "Init project"
 git push origin
@@ -48,9 +52,9 @@ kill ${SSH_AGENT_PID}
 
 # Remove local git repository.
 cd -
-rm -rf ~/ci/demo
+rm -rf ${BASEDIR}/demo
 
-curl -X POST -d@- --header "Content-Type: application/xml;charset=UTF-8" ${JENKINS_WEBURL}/createItem?name=demo < ~/ci/jenkins.config.xml
+curl -k -X POST -d@- --header "Content-Type: application/xml;charset=UTF-8" ${JENKINS_WEBURL}/createItem?name=demo < ${BASEDIR}/jenkins.config.xml
 
 # Import redmine demo data
 REDMINE_DEMO_DATA_SQL=redmine-init-demo.sql
@@ -59,4 +63,4 @@ docker exec pg-redmine gosu postgres psql -d redmine -U redmine -f /${REDMINE_DE
 docker exec pg-redmine gosu postgres psql -d redmine -U redmine -c "update roles set permissions = '---\n- :view_issues\n- :add_issues\n- :view_changesets\n' where id = 1"
 
 # Create jenkins slave docker volume.
-source ~/jenkins-slave-docker/createJenkinsSlave.sh
+source ${SCRIPT_DIR}/jenkins-slave-docker/createJenkinsSlave.sh

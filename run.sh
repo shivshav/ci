@@ -1,8 +1,11 @@
 #!/bin/bash
+
+BASEDIR=$(readlink -f $(dirname $0))
+
 set -e
 
-source ~/ci/config
-source ~/ci/config.default
+source ${BASEDIR}/config
+source ${BASEDIR}/config.default
 
 if [ ! -e "${SSH_KEY_PATH}" -o ! -e "${SSH_KEY_PATH}.pub" ]; then
   echo "Generating SSH keys..."
@@ -11,32 +14,46 @@ if [ ! -e "${SSH_KEY_PATH}" -o ! -e "${SSH_KEY_PATH}.pub" ]; then
   ssh-keygen -t rsa -N "" -f "${SSH_KEY_PATH}" -C ${GERRIT_ADMIN_EMAIL}
 fi
 
-~/ci/createContainer.sh ${SUFFIX}
+# Create containers
+${BASEDIR}/createContainer.sh ${SUFFIX}
 while [ -z "$(docker logs ${GERRIT_NAME} 2>&1 | grep "Gerrit Code Review [0-9..]* ready")" ]; do
     echo "Waiting gerrit ready."
     sleep 1
 done
-echo "Gerrit is ready"
+echo "Gerrit container is ready"
 while [ -z "$(docker logs ${JENKINS_NAME} 2>&1 | grep "setting agent port for jnlp")" ]; do
     echo "Waiting jenkins ready."
     sleep 1
 done
-echo "Jenkins is ready"
+echo "Jenkins container is ready"
 while [ -z "$(docker logs ${REDMINE_NAME} 2>&1 | grep "INFO success: nginx entered RUNNING state")" ]; do
     echo "Waiting redmine ready."
     sleep 1
 done
-echo "Redmine is ready"
-#sleep 5
-~/ci/setupContainer.sh ${SUFFIX}
-#sleep 10
-while [ -n "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 5 | grep 'Running from: /usr/share/jenkins/jenkins.war')" -o \
-        -z "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 5 | grep 'setting agent port for jnlp')" ]; do
+echo "Redmine container is ready"
+
+# Setup containers
+${BASEDIR}/setupContainer.sh ${SUFFIX}
+while [ -n "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 15 | grep 'Running from: /usr/share/jenkins/jenkins.war')" -o \
+        -z "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 15 | grep 'setting agent port for jnlp')" ]; do
     echo "Waiting jenkins ready."
     sleep 1
 done
-echo "Jenkins is ready"
-#sleep 5
-~/ci/importDemoProject.sh ${SUFFIX}
+echo "Jenkins container configured"
+
+# Ensure redmine is running
+COUNTER=0
+while [ "$(curl -I http://${REDMINE_ADMIN_USER}:${REDMINE_ADMIN_PASSWD}@localhost/redmine 2>/dev/null | head -n1 | cut -d$' ' -f2)" \
+        -ne "200" ]; do
+    # Max timeout
+    if [ $COUNTER -eq "90" ]; then 
+        exit 1; 
+    fi
+    echo "Waiting redmine service"
+    echo "Status Code from redmine: $(curl -I http://${REDMINE_ADMIN_USER}:\${REDMINE_ADMIN_PASSWD}@localhost/redmine 2>/dev/null | head -n1 | cut -d$' ' -f2)"
+    sleep 1
+    let COUNTER=COUNTER+1
+done
+echo "Redmine service running"
 
 echo ">>>> Everything is ready."

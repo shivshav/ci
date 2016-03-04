@@ -1,15 +1,23 @@
 #!/bin/bash
-
 # Define common variables.
 
 ## Suffix of containers' name
 SUFFIX=${SUFFIX:-$1}
+
+if [ ${NGINX_USE_HTTPS} -eq 0 ]; then
+    PROTO="http"
+else
+    PROTO="https"
+fi
 
 ## OpenLDAP
 if [ ${#SLAPD_DOMAIN} -gt 0 -a ${#SLAPD_PASSWORD} -gt 0 ]; then
     LDAP_SERVER="${HOST_NAME}"
     LDAP_ACCOUNTBASE="ou=accounts$(echo .${SLAPD_DOMAIN} | sed 's/\./,dc=/g')"
 fi
+
+# Postgres container configuration
+POSTGRES_IMAGE_NAME=${POSTGRES_IMAGE_NAME:-postgres}
 
 ## Gerrit administrator's ssh key
 SSH_KEY_PATH=${SSH_KEY_PATH:-~/.ssh/id_rsa}
@@ -19,8 +27,9 @@ GERRIT_NAME=gerrit${SUFFIX}
 GERRIT_VOLUME=gerrit-volume${SUFFIX}
 PG_GERRIT_NAME=pg-gerrit${SUFFIX}
 
+
 ## Gerrit access hostname
-GERRIT_WEBURL=http://${HOST_NAME}/${GERRIT_NAME}
+GERRIT_WEBURL=${PROTO}://${HOST_NAME}/${GERRIT_NAME}
 HTTPD_LISTENURL=proxy-http://*:8080/${GERRIT_NAME}
 GERRIT_SSH_HOST=${HOST_NAME}
 
@@ -38,7 +47,7 @@ JENKINS_OPTS=--prefix=/${JENKINS_NAME}
 JENKINS_IMAGE_NAME=${JENKINS_IMAGE_NAME:-openfrontier/jenkins}
 
 ## Jenkins access
-JENKINS_WEBURL=http://${HOST_NAME}/${JENKINS_NAME}
+JENKINS_WEBURL=${PROTO}://${HOST_NAME}/${JENKINS_NAME}
 
 ## Redmine container's name
 REDMINE_NAME=redmine${SUFFIX}
@@ -48,11 +57,22 @@ PG_REDMINE_NAME=pg-redmine${SUFFIX}
 ## Redmine docker image's name
 REDMINE_IMAGE_NAME=${REDMINE_IMAGE_NAME:-sameersbn/redmine}
 
+#PhpLDAP Admin container's name
+PHPLDAPADMIN_NAME=phpldapadmin${SUFFIX}
+
+#PhpLDAP Admin docker image's name
+PHPLDAP_IMAGE_NAME=${PHPLDAP_IMAGE_NAME:-osixia/phpldapadmin}
+
+## DokuWiki configs
+DOKUWIKI_NAME=dokuwiki${SUFFIX}
+DOKUWIKI_VOLUME=dokuwiki-volume${SUFFIX}
+DOKUWIKI_IMAGE_NAME=istepanov/dokuwiki${SUFFIX}
+
 ## Nginx docker container's name
 NGINX_NAME=proxy
 
 ## Nginx docker image's name
-NGINX_IMAGE_NAME=${NGINX_IMAGE_NAME:-nginx}
+NGINX_IMAGE_NAME=${NGINX_IMAGE_NAME:-h3nrik/nginx-ldap}
 
 ## Nginx file upload limit.
 NGINX_MAX_UPLOAD_SIZE=${NGINX_MAX_UPLOAD_SIZE:-200m}
@@ -61,7 +81,7 @@ NGINX_MAX_UPLOAD_SIZE=${NGINX_MAX_UPLOAD_SIZE:-200m}
 if [ ${#NEXUS_WEBURL} -gt 0 ]; then
     NEXUS_REPO=${NEXUS_WEBURL}/content/groups/public
 else
-    NEXUS_REPO=http://${HOST_NAME}/nexus/content/groups/public
+    NEXUS_REPO=${PROTO}://${HOST_NAME}/nexus/content/groups/public
 fi
 
 ## Nexus container's name.
@@ -77,3 +97,6 @@ LDAP_VOLUME=openldap-volume
 
 ## Openldap image's name.
 LDAP_IMAGE_NAME=${LDAP_IMAGE_NAME:-openfrontier/openldap}
+
+##Timezon
+TIME_ZONE=america/los_angeles

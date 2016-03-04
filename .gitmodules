@@ -1,0 +1,24 @@
+[submodule "img-scripts/gerrit-docker"]
+	path = img-scripts/gerrit-docker
+	url = https://github.com/shivshav/gerrit-docker.git
+[submodule "img-scripts/jenkins-slave-docker"]
+	path = img-scripts/jenkins-slave-docker
+	url = https://github.com/openfrontier/jenkins-slave-docker.git
+[submodule "img-scripts/jenkins-docker"]
+	path = img-scripts/jenkins-docker
+	url = https://github.com/shivshav/jenkins-docker.git
+[submodule "img-scripts/redmine-docker"]
+	path = img-scripts/redmine-docker
+	url = https://github.com/shivshav/redmine-docker.git
+[submodule "img-scripts/nginx-docker"]
+	path = img-scripts/nginx-docker
+	url = https://github.com/shivshav/nginx-docker.git
+[submodule "img-scripts/openldap-docker"]
+	path = img-scripts/openldap-docker
+	url = https://github.com/shivshav/openldap-docker.git
+[submodule "img-scripts/nexus-docker"]
+	path = img-scripts/nexus-docker
+	url = https://github.com/shivshav/nexus-docker.git
+[submodule "img-scripts/dokuwiki-docker"]
+	path = img-scripts/dokuwiki-docker
+	url = https://github.com/shivshav/dokuwiki-docker.git
