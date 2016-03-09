@@ -29,6 +29,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - "./travis-submodules.sh"
+  - sudo docker build -t ci/redmine ./img-scripts/redmine-docker
 script:
   - "py.test -s"
 notifications:
