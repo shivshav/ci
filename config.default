@@ -60,13 +60,13 @@ PHPLDAP_IMAGE_NAME=${PHPLDAP_IMAGE_NAME:-osixia/phpldapadmin}
 ## DokuWiki configs
 DOKUWIKI_NAME=dokuwiki${SUFFIX}
 DOKUWIKI_VOLUME=dokuwiki-volume${SUFFIX}
-DOKUWIKI_IMAGE_NAME=istepanov/dokuwiki${SUFFIX}
+DOKUWIKI_IMAGE_NAME=ci/dokuwiki
 
 ## Nginx docker container's name
 NGINX_NAME=proxy
 
 ## Nginx docker image's name
-NGINX_IMAGE_NAME=${NGINX_IMAGE_NAME:-h3nrik/nginx-ldap}
+NGINX_IMAGE_NAME=${NGINX_IMAGE_NAME:-ci/nginx}
 
 ## Nginx file upload limit.
 NGINX_MAX_UPLOAD_SIZE=${NGINX_MAX_UPLOAD_SIZE:-200m}
@@ -83,14 +83,15 @@ NEXUS_NAME=nexus
 NEXUS_VOLUME=nexus-volume
 
 # Nexue docker image's name.
-NEXUS_IMAGE_NAME=${NEXUS_IMAGE_NAME:-openfrontier/nexus}
+NEXUS_IMAGE_NAME=${NEXUS_IMAGE_NAME:-ci/nexus}
 
 ## Openldap container's name.
 LDAP_NAME=openldap
 LDAP_VOLUME=openldap-volume
 
 ## Openldap image's name.
-LDAP_IMAGE_NAME=${LDAP_IMAGE_NAME:-openfrontier/openldap}
+LDAP_IMAGE_NAME=ci/openldap
+#${LDAP_IMAGE_NAME:-ci/openldap}
 
 ##Timezon
 TIME_ZONE=america/los_angeles

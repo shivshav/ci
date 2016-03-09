@@ -30,6 +30,10 @@ before_script:
   - sleep 3 # give xvfb some time to start
   - "./travis-submodules.sh"
   - sudo docker build -t ci/redmine ./img-scripts/redmine-docker
+  - sudo docker build -t ci/dokuwiki ./img-scripts/dokuwiki-docker
+  - sudo docker build -t ci/nexus ./img-scripts/nexus-docker
+  - sudo docker build -t ci/nginx ./img-scripts/nginx-docker
+  - sudo docker build -t ci/openldap ./img-scripts/openldap-docker
 script:
   - "py.test -s"
 notifications:
