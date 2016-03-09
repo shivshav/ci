@@ -29,10 +29,10 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - "./travis-submodules.sh"
-  - docker build -t ci/dokuwiki ./img-scripts/dokuwiki-docker
-  - docker build -t ci/nexus ./img-scripts/nexus-docker
-  - docker build -t ci/nginx ./img-scripts/nginx-docker
-  - docker build -t ci/openldap ./img-scripts/openldap-docker
+  - sudo docker build -t ci/dokuwiki ./img-scripts/dokuwiki-docker
+  - sudo docker build -t ci/nexus ./img-scripts/nexus-docker
+  - sudo docker build -t ci/nginx ./img-scripts/nginx-docker
+  - sudo docker build -t ci/openldap ./img-scripts/openldap-docker
 script:
   - "py.test -s"
 notifications:
