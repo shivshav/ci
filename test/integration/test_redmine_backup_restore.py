@@ -51,7 +51,7 @@ def setup_function(function):
 
     configure_headless_browser()
     log_into_ci()
-    log_into_redmine()
+#    log_into_redmine()
     create_redmine_project()
     create_redmine_issue()
 
