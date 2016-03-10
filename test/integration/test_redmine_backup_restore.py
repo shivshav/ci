@@ -19,7 +19,7 @@ def configure_headless_browser():
     DRIVER = webdriver.Firefox() # initilize selenium
 
 def log_into_ci():
-    DRIVER.get("http://admin:passwd@localhost/redmine")
+    DRIVER.get("http://admin:password@localhost/redmine")
 
 def log_into_redmine():
     DRIVER.get("http://localhost/redmine/login")
