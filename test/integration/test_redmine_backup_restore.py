@@ -14,7 +14,7 @@ def check_path_test_dir(current_dir):
 
 def configure_headless_browser():
     global DRIVER, DISPLAY
-    DISPLAY = Display(visible=0)
+    DISPLAY = Display(visible=1)
     DISPLAY.start()
     DRIVER = webdriver.Firefox() # initilize selenium
 
