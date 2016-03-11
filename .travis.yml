@@ -2,8 +2,8 @@ env:
   global:
   - OPENLDAP_URL=
   - OPENLDAP_BRANCH=
-  - REDMINE_URL=
-  - REDMINE_BRANCH=
+  - REDMINE_URL=https://github.com/steve-dev/redmine-docker.git
+  - REDMINE_BRANCH=develop
   - JENKINS_URL=
   - JENKINS_BRANCH=
   - JENKINS_SLAVE_URL=
@@ -29,6 +29,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - "./travis-submodules.sh"
+  - sudo docker build -t ci/redmine ./img-scripts/redmine-docker
   - sudo docker build -t ci/dokuwiki ./img-scripts/dokuwiki-docker
   - sudo docker build -t ci/nexus ./img-scripts/nexus-docker
   - sudo docker build -t ci/nginx ./img-scripts/nginx-docker

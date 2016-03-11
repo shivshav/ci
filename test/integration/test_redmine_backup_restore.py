@@ -19,15 +19,15 @@ def configure_headless_browser():
     DRIVER = webdriver.Firefox() # initilize selenium
 
 def log_into_ci():
-    DRIVER.get("http://admin:passwd@localhost/redmine")
+    DRIVER.get("http://admin:password@localhost/redmine")
 
-def log_into_redmine():
-    DRIVER.get("http://localhost/redmine/login")
-    element = DRIVER.find_element_by_id("username")
-    element.send_keys("admin")
-    element = DRIVER.find_element_by_id("password")
-    element.send_keys("admin")
-    DRIVER.find_element_by_name("login").click()
+#def log_into_redmine():
+#    DRIVER.get("http://localhost/redmine/login")
+#    element = DRIVER.find_element_by_id("username")
+#    element.send_keys("admin")
+#    element = DRIVER.find_element_by_id("password")
+#    element.send_keys("admin")
+#    DRIVER.find_element_by_name("login").click()
 
 def create_redmine_project():
     DRIVER.get("http://localhost/redmine/projects")
@@ -51,7 +51,7 @@ def setup_function(function):
 
     configure_headless_browser()
     log_into_ci()
-    log_into_redmine()
+#    log_into_redmine()
     create_redmine_project()
     create_redmine_issue()
 
