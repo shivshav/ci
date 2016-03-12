@@ -26,9 +26,7 @@ ${SCRIPT_DIR}/nginx-docker/destroyNginx.sh
 ${SCRIPT_DIR}/openldap-docker/destroyOpenLDAP.sh
 
 # Destroy Nexus server.
-if [ ${#NEXUS_WEBURL} -eq 0 ]; then
-    ${SCRIPT_DIR}/nexus-docker/destroyNexus.sh
-fi
+${SCRIPT_DIR}/nexus-docker/destroyNexus.sh
 
 # Destroy jenkins slave volume.
 ${SCRIPT_DIR}/jenkins-slave-docker/destroyJenkinsSlave.sh
