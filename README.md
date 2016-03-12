@@ -1,4 +1,5 @@
-# ci project [![Build Status](https://travis-ci.org/shivshav/ci.svg)](https://travis-ci.org/shivshav/ci)
+# ci project [![Build Status](https://travis-ci.org/shivshav/ci.svg?branch=master)](https://travis-ci.org/shivshav/ci)
+Development branch [![Build Status](https://travis-ci.org/shivshav/ci.svg?branch=develop)](https://travis-ci.org/shivshav/ci)
 ## Features
 * Continuous integration system base on other docker projects.
 * Create a Gerrit container with PostgreSQL as backend and OpenLDAP as authorization server.
