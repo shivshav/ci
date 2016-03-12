@@ -12,7 +12,7 @@ source ${BASEDIR}/config.default
 
 #Create administrator in Gerrit.
 echo ">>>> Setup Gerrit."
-${SCRIPT_DIR}/gerrit-docker/addGerritUser.sh ${GERRIT_WEBURL} ${GERRIT_ADMIN_UID} ${GERRIT_ADMIN_PWD} ${SSH_KEY_PATH}
+#${SCRIPT_DIR}/gerrit-docker/addGerritUser.sh ${GERRIT_WEBURL} ${GERRIT_ADMIN_UID} ${GERRIT_ADMIN_PWD} ${SSH_KEY_PATH}
 
 #Integrate Jenkins with Gerrit.
 echo ">>>> Setup Jenkins."
