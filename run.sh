@@ -16,20 +16,31 @@ fi
 
 # Create containers
 ${BASEDIR}/createContainer.sh ${SUFFIX}
+WAIT_STR="Waiting for gerrit container."
 while [ -z "$(docker logs ${GERRIT_NAME} 2>&1 | grep "Gerrit Code Review [0-9..]* ready")" ]; do
-    echo "Waiting gerrit ready."
+    WAIT_STR+="."
+    printf "${WAIT_STR}\r"
     sleep 1
 done
+printf "\n"
 echo "Gerrit container is ready"
+
+WAIT_STR="Waiting for Jenkins container..."
 while [ -z "$(docker logs ${JENKINS_NAME} 2>&1 | grep "setting agent port for jnlp")" ]; do
-    echo "Waiting jenkins ready."
+    WAIT_STR+="."
+    printf "${WAIT_STR}\r"
     sleep 1
 done
+printf "\n"
 echo "Jenkins container is ready"
+
+WAIT_STR="Waiting redmine ready."
 while [ -z "$(docker logs ${REDMINE_NAME} 2>&1 | grep "INFO success: nginx entered RUNNING state")" ]; do
-    echo "Waiting redmine ready."
+    WAIT_STR+="."
+    printf "${WAIT_STR}\r"
     sleep 1
 done
+printf "\n"
 echo "Redmine container is ready"
 
 # Setup containers
