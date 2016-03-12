@@ -29,12 +29,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - "./travis-submodules.sh"
-  - docker build -t ci/dokuwiki ./img-scripts/dokuwiki-docker
-  - docker build -t ci/gerrit ./img-scripts/gerrit-docker
-  - docker build -t ci/jenkins ./img-scripts/jenkins-docker
-  - docker build -t ci/nexus ./img-scripts/nexus-docker
-  - docker build -t ci/nginx ./img-scripts/nginx-docker
-  - docker build -t ci/openldap ./img-scripts/openldap-docker
+  - "./build-all.sh"
 script:
   - "py.test -s"
 notifications:
