@@ -28,7 +28,7 @@ HTTPD_LISTENURL=proxy-http://*:8080/${GERRIT_NAME}
 GERRIT_SSH_HOST=${HOST_NAME}
 
 ## Gerrit docker image's name
-GERRIT_IMAGE_NAME=${GERRIT_IMAGE_NAME:-openfrontier/gerrit}
+GERRIT_IMAGE_NAME=${GERRIT_IMAGE_NAME:-ci/gerrit}
 
 ## Jenkins container's name
 JENKINS_NAME=jenkins${SUFFIX}
@@ -38,7 +38,7 @@ JENKINS_VOLUME=jenkins-volume${SUFFIX}
 JENKINS_OPTS=--prefix=/${JENKINS_NAME}
 
 ## Jenkins docker image's name
-JENKINS_IMAGE_NAME=${JENKINS_IMAGE_NAME:-openfrontier/jenkins}
+JENKINS_IMAGE_NAME=${JENKINS_IMAGE_NAME:-ci/jenkins}
 
 ## Jenkins access
 JENKINS_WEBURL=http://${HOST_NAME}/${JENKINS_NAME}
@@ -94,4 +94,4 @@ LDAP_IMAGE_NAME=ci/openldap
 #${LDAP_IMAGE_NAME:-ci/openldap}
 
 ##Timezon
-TIME_ZONE=america/los_angeles
+TIMEZONE=america/los_angeles
