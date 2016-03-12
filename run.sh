@@ -34,12 +34,6 @@ echo "Redmine container is ready"
 
 # Setup containers
 ${BASEDIR}/setupContainer.sh ${SUFFIX}
-while [ -n "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 15 | grep 'Running from: /usr/share/jenkins/jenkins.war')" -o \
-        -z "$(docker logs ${JENKINS_NAME} 2>&1 | tail -n 15 | grep 'setting agent port for jnlp')" ]; do
-    echo "Waiting jenkins ready."
-    sleep 1
-done
-echo "Jenkins container configured"
 
 # Ensure redmine is running
 COUNTER=0
