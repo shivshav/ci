@@ -19,8 +19,8 @@ echo ">>>> Setup Jenkins."
 ${SCRIPT_DIR}/jenkins-docker/setupJenkins.sh ${GERRIT_ADMIN_UID} ${GERRIT_ADMIN_EMAIL} ${SSH_KEY_PATH} ${LDAP_ACCOUNTBASE} ${JENKINS_NAME} ${GERRIT_NAME} ${GERRIT_SSH_HOST} ${GERRIT_WEBURL} ${JENKINS_WEBURL}  ${LDAP_NAME} ${LDAP_VOLUME} ${SLAPD_DOMAIN} ${NEXUS_REPO}
 
 #Integrate Redmine with Openldap and import init data.
-echo ">>>> Setup Redmine."
-${SCRIPT_DIR}/redmine-docker/setupRedmine.sh
+#echo ">>>> Setup Redmine."
+#${SCRIPT_DIR}/redmine-docker/setupRedmine.sh
 
 # Add Nexus configuration files and do general Nexus setup
 echo ">>>> Setup Nexus."

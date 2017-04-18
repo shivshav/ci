@@ -49,7 +49,7 @@ REDMINE_VOLUME=redmine-volume${SUFFIX}
 PG_REDMINE_NAME=pg-redmine${SUFFIX}
 
 ## Redmine docker image's name
-REDMINE_IMAGE_NAME=${REDMINE_IMAGE_NAME:-sameersbn/redmine}
+REDMINE_IMAGE_NAME=${REDMINE_IMAGE_NAME:-ci/redmine}
 
 #PhpLDAP Admin container's name
 PHPLDAPADMIN_NAME=phpldapadmin${SUFFIX}
